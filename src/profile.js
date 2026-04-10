@@ -361,16 +361,25 @@ document.getElementById('voiceQuestionsContainer').addEventListener('click', asy
 
     document.getElementById('profileAvatar').innerHTML = '⏳';
     
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'SeeU.ae');
+
     try {
-      const storageRef = ref(storage, `profile-pics/${user.uid}`);
-      await uploadBytes(storageRef, file);
-      const photoURL = await getDownloadURL(storageRef);
-      
-      document.getElementById('profileAvatar').style.backgroundImage = `url('${photoURL}')`;
+      const resp = await fetch("https://api.cloudinary.com/v1_1/dano4bou5/image/upload",
+        {
+          method: "POST",
+          body: formData
+      });
+      const fileData = await resp.json();
+      console.log("Image Data: ", fileData);
+      const imgURL = fileData.secure_url;
+
+      profile.photoURL = imgURL;
+
+      document.getElementById('profileAvatar').style.backgroundImage = `url('${imgURL}')`;
       document.getElementById('profileAvatar').innerHTML = '';
-      
-      // Directly update local profile
-      profile.photoURL = photoURL;
+
     } catch (error) {
       alert('Upload failed: ' + error.message);
       document.getElementById('profileAvatar').innerHTML = 
