@@ -71,21 +71,41 @@
   // ==============================================
   // 3. UPLOAD ANSWER (to Firebase for specific question)
   // ==============================================
+
+  
+
   async uploadAnswer(qNumber, blob) {
+    const formData = new FormData();
+    formData.append('file', blob);
+    formData.append('upload_preset', 'SeeU_audio');
     try {
-      // Dynamic import - works with type="module"
-      const { getStorage, ref, uploadBytes, getDownloadURL } = await import(
-        "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js"
-      );
+      // // Dynamic import - works with type="module"
+      // const { getStorage, ref, uploadBytes, getDownloadURL } = await import(
+      //   "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js"
+      // );
       
-      const storage = getStorage(this.firebaseApp);
-      const storageRef = ref(storage, `user-voices/${this.userId}/q${qNumber}.webm`);
+      // const storage = getStorage(this.firebaseApp);
+      // const storageRef = ref(storage, `user-voices/${this.userId}/q${qNumber}.webm`);
       
-      await uploadBytes(storageRef, blob);
-      const url = await getDownloadURL(storageRef);
+      // await uploadBytes(storageRef, blob);
+      // const url = await getDownloadURL(storageRef);
       
-      console.log(`Uploaded Q${qNumber}:`, url);
-      return url;
+      // console.log(`Uploaded Q${qNumber}:`, url);
+      // return url;
+
+
+      const resp = await fetch('https://api.cloudinary.com/v1_1/dano4bou5/video/upload', 
+        {
+          method: "POST",
+          body: formData
+        });
+        const fileData = await resp.json();
+        const audioURL = fileData.secure_url;
+        console.log(audioURL);
+        return audioURL;
+
+
+
       
     } catch (error) {
       console.error(`Upload failed Q${qNumber}:`, error);
