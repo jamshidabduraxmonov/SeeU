@@ -36,15 +36,22 @@ async function renderProfileSettings() {
       <h1>SeeU in Dubai ✈️</h1>
       <p>Meet new friends to hang out!</p>
 
-      <input id="email" class="input" type="email" placeholder="Email"
-        style="width:100%;padding:16px;margin:10px 0;border-radius:12px;border:1px solid #ddd;" />
+      <div>
+        <form>
+            <input id="email" class="input" type="email" placeholder="Email"
+                    style="width:100%;padding:16px;margin:10px 0;border-radius:12px;border:1px solid #ddd;" />
 
-      <input id="password" class="input" type="password" placeholder="Create Password(or enter previous one)"
-        style="width:100%;padding:16px;margin:10px 0;border-radius:12px;border:1px solid #ddd;" />
+            <input id="password" class="input" type="password" placeholder="Create Password(or enter previous one)" style="width:100%;padding:16px;margin:10px 0;border-radius:12px;border:1px solid #ddd;" />
+            <button onclick="togglePassword()">Show Password</button>
+            <div>
+                <button id="loginBtn" class="primary">Login</button>
+            </div>
+        </form>
+      </div>
+     
 
-        <button onclick="togglePassword()">Show Password</button>
 
-      <button id="loginBtn" class="primary">Login</button>
+
       <button id="googleLogin">Google Login</button>
     </div>
 
