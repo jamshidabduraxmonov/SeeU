@@ -10,8 +10,14 @@ import { renderFeed } from './feed.js';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  sendEmailVerification
+  sendEmailVerification,
+
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+
 
 
 
@@ -39,6 +45,7 @@ async function renderProfileSettings() {
         <button onclick="togglePassword()">Show Password</button>
 
       <button id="loginBtn" class="primary">Login</button>
+      <button id="googleLogin">Google Login</button>
     </div>
 
 
@@ -63,6 +70,28 @@ async function renderProfileSettings() {
      </div>
 
   `;
+
+
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+    function signInWithGoogle(){
+        signInWithPopup(auth, provider)
+        .then((result)=> {
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          const user = result.user;
+        }).catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+        });
+    }
+    
+    const googleButton = document.getElementById('googleLogin');
+    googleButton.addEventListener('click', signInWithGoogle);
+
+
+
 
     document.getElementById('loginBtn').onclick = async () => {
       const email = document.getElementById('email').value.trim();
@@ -104,21 +133,21 @@ async function renderProfileSettings() {
 
 
 
-  document.getElementById('signupBtn').onclick = async () => {
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
+  // document.getElementById('signupBtn').onclick = async () => {
+  //   const email = document.getElementById('email').value.trim();
+  //   const password = document.getElementById('password').value.trim();
 
-    if (!email || !password) {
-      alert("Email and password required");
-      return;
-    }
+  //   if (!email || !password) {
+  //     alert("Email and password required");
+  //     return;
+  //   }
 
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      alert(err.message);
-    }
-  };
+  //   try {
+  //     await createUserWithEmailAndPassword(auth, email, password);
+  //   } catch (err) {
+  //     alert(err.message);
+  //   }
+  // };
 
   return;
 }
@@ -398,7 +427,7 @@ document.getElementById('voiceQuestionsContainer').addEventListener('click', asy
     };
   }
 
-  
+
 
     // Save handler
   document.getElementById('saveProfile').onclick = async () => {
