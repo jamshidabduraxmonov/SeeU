@@ -14,7 +14,8 @@ import {
 
   GoogleAuthProvider,
   getAuth,
-  signInWithPopup
+  signInWithPopup,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 
@@ -42,7 +43,7 @@ async function renderProfileSettings() {
                     style="width:100%;padding:16px;margin:10px 0;border-radius:12px;border:1px solid #ddd;" />
 
             <input id="password" class="input" type="password" placeholder="Create Password(or enter previous one)" style="width:100%;padding:16px;margin:10px 0;border-radius:12px;border:1px solid #ddd;" />
-            <button onclick="togglePassword()">Show Password</button>
+            <button type="button" onclick="togglePassword()">Show Password</button>
             <div>
                 <button id="loginBtn" class="primary">Login</button>
             </div>
@@ -94,11 +95,13 @@ async function renderProfileSettings() {
           console.log(errorCode, errorMessage);
         });
     }
-    
+   
+
+
     const googleButton = document.getElementById('googleLogin');
     googleButton.addEventListener('click', signInWithGoogle);
 
-
+  
 
 
     document.getElementById('loginBtn').onclick = async () => {
@@ -156,9 +159,8 @@ async function renderProfileSettings() {
   //     alert(err.message);
   //   }
   // };
-
-  return;
-}
+    return;
+  }
 
 
 
@@ -169,7 +171,15 @@ async function renderProfileSettings() {
 
 
 
+ 
 
+    function signOutGoogle() {
+      signOut(auth).then(()=> {
+          console.log("Sign-out successful!")
+      }).catch(error => {
+          console.error(error.message);
+      });
+    }
   
 
 
@@ -323,10 +333,15 @@ async function renderProfileSettings() {
 
 
     <button id="saveProfile" class="save-btn">Save & Continue</button>
+
+    <button id="signOut" class="signOut-btn"> Sign Out </button>
     
   </div>
 `;
 
+
+  const signOutBtn = document.getElementById('signOut');
+  signOutBtn.addEventListener('click', signOutGoogle);
 
 
 document.querySelectorAll('input[name="availability"]').forEach(radio => {
