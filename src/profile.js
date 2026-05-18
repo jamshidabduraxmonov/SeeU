@@ -18,6 +18,8 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
+let signOutPopup = false;
+
 
 
 
@@ -101,7 +103,7 @@ async function renderProfileSettings() {
           const errorMessage = error.message;
           console.log(errorCode, errorMessage);
         });
-    }
+    }  
    
 
 
@@ -342,13 +344,46 @@ async function renderProfileSettings() {
     <button id="saveProfile" class="save-btn">Save & Continue</button>
 
     <button id="signOut" class="signOut-btn"> Sign Out </button>
+
+    <div id="outerPopup">
+            <div id="popup"></div>
+    </div>
+    
     
   </div>
 `;
 
+  
+  function runPopup() {
+    signOutPopup = true;
+
+    if(signOutPopup) {
+    const popup = document.getElementById('popup');
+    popup.innerHTML = `
+
+      <p>Are you sure you wanna Sign Out?</p>
+      <button id="outYes">Yes</button>
+    
+    `;
+  }
+
+  const outYes = document.getElementById('outYes');
+  outYes.addEventListener('click', signOutGoogle);
+  }
 
   const signOutBtn = document.getElementById('signOut');
-  signOutBtn.addEventListener('click', signOutGoogle);
+  signOutBtn.addEventListener('click', runPopup);
+
+  
+
+  // Sign out protection
+
+
+  
+
+
+
+
 
 
 document.querySelectorAll('input[name="availability"]').forEach(radio => {
