@@ -49,11 +49,18 @@ async function renderProfileSettings() {
             </div>
         </form>
       </div>
+
+
+      <div class="or-divider">
+        <h2>Or</h2>
+      </div>
      
 
 
 
-      <button id="googleLogin">Google Login</button>
+      <button id="googleLogin"> <img width="48" height="48" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo"/> 
+        <div><span>Sign In With Google</span></div> 
+      </button>
     </div>
 
 
