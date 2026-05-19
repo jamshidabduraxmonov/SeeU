@@ -346,6 +346,7 @@ async function renderProfileSettings() {
     <button id="signOut" class="signOut-btn"> Sign Out </button>
 
     <div id="outerPopup">
+            <div id="blur"></div>
             <div id="popup"></div>
     </div>
     
@@ -355,17 +356,26 @@ async function renderProfileSettings() {
 
   
   function runPopup() {
-    signOutPopup = true;
-
-    if(signOutPopup) {
+    
     const popup = document.getElementById('popup');
+    const outerPopup = document.getElementById('outerPopup');
+
+    outerPopup.style.display = 'flex';
+
+
     popup.innerHTML = `
 
+      <button id="close">x</button>
       <p>Are you sure you wanna Sign Out?</p>
       <button id="outYes">Yes</button>
     
     `;
-  }
+
+      
+  const closePopup = document.getElementById('close');
+  closePopup.addEventListener('click', ()=> {outerPopup.style.display = 'none'});
+
+
 
   const outYes = document.getElementById('outYes');
   outYes.addEventListener('click', signOutGoogle);
@@ -374,7 +384,6 @@ async function renderProfileSettings() {
   const signOutBtn = document.getElementById('signOut');
   signOutBtn.addEventListener('click', runPopup);
 
-  
 
   // Sign out protection
 
