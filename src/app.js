@@ -64,7 +64,7 @@ export { initVoiceSystem };
 
 
 
-onAuthStateChanged(auth, async (u) => {
+onAuthStateChanged(auth, async (u) => { // extracting profile data from database and store it in 'profile'
   user = u; // always set, can be null
 
   let p = {};

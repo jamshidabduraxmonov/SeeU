@@ -242,6 +242,11 @@ async function renderProfileSettings() {
              placeholder="Hotel name or area (e.g., Rove Downtown, Marina)">
     </div>
 
+    <div>
+          <label>What is on your mind?</label>
+          <input type="text" id="thoughts" value="${profile.thoughts || ''}"></input>
+    </div>
+
     <!-- Voice Questions Section - fully kept -->
     <div class="setting-group">
       <label>Voice Answers (30 seconds each)</label>
@@ -509,6 +514,8 @@ document.getElementById('voiceQuestionsContainer').addEventListener('click', asy
     const newName = document.getElementById('profileName').value.trim();
     const accommodation = document.getElementById('accommodation').value.trim();
 
+    const thoughts = document.getElementById('thoughts').value.trim();
+
     const currentIntention = document.querySelector('input[name="currentIntention"]:checked')?.value;
     const availability = document.querySelector('input[name="availability"]:checked')?.value;
 
@@ -517,7 +524,7 @@ document.getElementById('voiceQuestionsContainer').addEventListener('click', asy
       availabilityDate = document.getElementById('availabilityDate').value;
       if (!availabilityDate) {
         alert('Please select a date for "Other date"');
-        return;
+        return;setDoc
       }
     }
 
@@ -530,6 +537,7 @@ document.getElementById('voiceQuestionsContainer').addEventListener('click', asy
      const updateData = {
       name: newName,
       accommodation,
+      thoughts,
       currentIntention,
       availability,
       updatedAt: new Date()
@@ -541,6 +549,7 @@ document.getElementById('voiceQuestionsContainer').addEventListener('click', asy
 if (currentIntention) updateData.currentIntention = currentIntention;
 if (availability) updateData.availability = availability;
 if (profile.photoURL) updateData.photoURL = profile.photoURL;
+if(thoughts) updateData.thoughts = thoughts;
 
       if (profile.photoURL) {
         updateData.photoURL = profile.photoURL;
