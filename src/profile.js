@@ -365,9 +365,10 @@ async function renderProfileSettings() {
 
     popup.innerHTML = `
 
-      <button id="close">x</button>
+      
       <p>Are you sure you wanna Sign Out?</p>
       <button id="outYes">Yes</button>
+      <button id="close">No</button>
     
     `;
 
