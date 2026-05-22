@@ -39,7 +39,7 @@ async function renderFeed() {
     if (!content || !allUsersCache || !profile) return;
 
     content.innerHTML = `<div class="loading" style="text-align:center; padding:100px 20px;">
-      <div style="font-size:48px; animation: spin 1.5s linear infinite;">⏳</div>
+      <div style="font-size:48px; animation: spin 0.5s linear infinite;">⏳</div>
       <p style="margin-top:16px; font-size:18px;">Loading buddies...</p>
     </div>
 
@@ -243,6 +243,10 @@ if (currentCandidateIndex >= feedCandidates.length) {
       <div class="profile-header">
         <h2>${currentCandidate.name || 'Traveler'}</h2>
       </div>
+
+          <blockquote class="thought-box">
+              <p>${currentCandidate.thoughts || 'Thinking...'}</p>
+          </blockquote>
 
       <div class="details-section">
         ${currentCandidate.accommodation ? `
