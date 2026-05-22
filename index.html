@@ -595,6 +595,30 @@ select {
   color: #1c1e21;
 }
 
+
+blockquote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+blockquote:before,
+blockquote:after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 5px;
+  background-color: #98838e;
+}
+
+blockquote p {
+  font-family: "Lobster Two", cursive;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: unset;
+}
+
+
 .vibe-badge {
   display: inline-block;
   background: #f0f2f5;
