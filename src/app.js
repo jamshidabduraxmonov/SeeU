@@ -12,7 +12,6 @@ import { getStorage } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-
 import { doc, getDoc, getDocs, collection,  setDoc, query, where } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 
-import { initVoiceSystem } from './voiceSystem.js';
 import { initNavigation } from './navigation.js';
 
 
@@ -50,7 +49,6 @@ export const storage = getStorage(app);
 
 export let user = null;
 export let profile = null;
-export { initVoiceSystem };
 
 
 

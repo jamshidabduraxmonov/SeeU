@@ -102,6 +102,10 @@ if (!requester.name || requester.name === 'Loading...') {
           <h2>${requester.name || 'Traveler'}</h2>
         </div>
 
+        <blockquote class="thought-box">
+            <p>${requester.thoughts || 'Thinking...'}</p>
+        </blockquote>
+
         <div class="details-section">
           <div class="detail-item">
             <span class="detail-icon">📅</span>
@@ -137,25 +141,6 @@ if (!requester.name || requester.name === 'Loading...') {
             </div>
           </div>` : ''}
         </div>
-
-        <div class="audio-section">
-          ${[1,2,3].map(q => {
-            const url = requester.voiceAnswers?.[`q${q}`];
-            const questions = [
-              "What's something simple you enjoy more than people expect?",
-              "What made you smile today?",
-              "Tell us about a small moment you enjoyed recently."
-            ];
-            return `
-              <div class="voice-answer-feed">
-                <div class="question-label">Q${q}: ${questions[q-1]}</div>
-                ${url ? `<audio controls src="${url}" preload="none"></audio>` : '<small>Not recorded</small>'}
-              </div>
-            `;
-          }).join('')}
-        </div>
-
-        <!-- Accept/Decline buttons stay here -->
       </div>
     </div>
   `;
@@ -275,23 +260,6 @@ if (currentCandidateIndex >= feedCandidates.length) {
               : currentCandidate.availability || 'Not set'}</p>
           </div>
         </div>` : ''}
-      </div>
-
-      <div class="audio-section">
-        ${[1,2,3].map(q => {
-          const url = currentCandidate.voiceAnswers?.[`q${q}`];
-          const questions = [
-            "What's something simple you enjoy more than people expect?",
-            "What made you smile today?",
-            "Tell us about a small moment you enjoyed recently."
-          ];
-          return `
-            <div class="voice-answer-feed">
-              <div class="question-label">Q${q}: ${questions[q-1]}</div>
-              ${url ? `<audio controls src="${url}" preload="none"></audio>` : '<small>Not recorded</small>'}
-            </div>
-          `;
-        }).join('')}
       </div>
 
       <div class="action-buttons">

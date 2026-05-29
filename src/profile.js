@@ -5,7 +5,6 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
 
 import { db, user, profile, storage, app, auth} from './app.js';
 import {sendMessage, listenToChat} from './chat.js';
-import { handleRecord, handlePlay, handleStop, handleSave, handleDelete, initVoiceSystem } from './voiceSystem.js';
 import { renderFeed } from './feed.js';
 import {
   createUserWithEmailAndPassword,
@@ -246,84 +245,6 @@ async function renderProfileSettings() {
           <label>What is on your mind?</label>
           <input type="text" id="thoughts" value="${profile.thoughts || ''}"></input>
     </div>
-
-    <!-- Voice Questions Section - fully kept -->
-    <div class="setting-group">
-      <label>Voice Answers (30 seconds each)</label>
-      
-      <div id="voiceQuestionsContainer">
-        <!-- Question 1 -->
-        <div class="voice-question" data-q="1">
-          <div class="question-header">
-            <strong>🎤 1. What's something simple you enjoy more than people expect?</strong>
-            <span class="question-status" data-status="empty">Not recorded</span>
-          </div>
-          
-          <div class="voice-controls">
-            <button class="record-btn" data-action="record">🎤 Record</button>
-            <button class="stop-btn" data-action="stop" disabled>⏹️ Stop</button>
-            <button class="play-btn" data-action="play" disabled>▶️ Play</button>
-            <button class="save-btn" data-action="save" disabled>✅ Save</button>
-            <button class="delete-btn" data-action="delete" disabled>🗑️ Delete</button>
-            
-            <span class="timer">00:30</span>
-          </div>
-          
-          <div class="recording-status">
-            <small class="status-text">Press Record to start</small>
-            <div class="waveform"></div>
-          </div>
-        </div>
-
-        <!-- Question 2 -->
-        <div class="voice-question" data-q="2">
-          <div class="question-header">
-            <strong>🎤 2. What made you smile today?</strong>
-            <span class="question-status" data-status="empty">Not recorded</span>
-          </div>
-          
-          <div class="voice-controls">
-            <button class="record-btn" data-action="record">🎤 Record</button>
-            <button class="stop-btn" data-action="stop" disabled>⏹️ Stop</button>
-            <button class="play-btn" data-action="play" disabled>▶️ Play</button>
-            <button class="save-btn" data-action="save" disabled>✅ Save</button>
-            <button class="delete-btn" data-action="delete" disabled>🗑️ Delete</button>
-            
-            <span class="timer">00:30</span>
-          </div>
-          
-          <div class="recording-status">
-            <small class="status-text">Press Record to start</small>
-            <div class="waveform"></div>
-          </div>
-        </div>
-
-        <!-- Question 3 -->
-        <div class="voice-question" data-q="3">
-          <div class="question-header">
-            <strong>🎤 3. Tell us about a small moment you enjoyed recently.</strong>
-            <span class="question-status" data-status="empty">Not recorded</span>
-          </div>
-          
-          <div class="voice-controls">
-            <button class="record-btn" data-action="record">🎤 Record</button>
-            <button class="stop-btn" data-action="stop" disabled>⏹️ Stop</button>
-            <button class="play-btn" data-action="play" disabled>▶️ Play</button>
-            <button class="save-btn" data-action="save" disabled>✅ Save</button>
-            <button class="delete-btn" data-action="delete" disabled>🗑️ Delete</button>
-            
-            <span class="timer">00:30</span>
-          </div>
-          
-          <div class="recording-status">
-            <small class="status-text">Press Record to start</small>
-            <div class="waveform"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
 
 
     <div class="setting-group">
@@ -571,30 +492,6 @@ if(thoughts) updateData.thoughts = thoughts;
       alert('Error: ' + error.message);
     }
   };
-
-  // document.getElementById('logoutBtn').onclick = async () => {
-  //   await auth.signOut();
-  //   // Optional: force reload
-  //   window.location.reload();
-  // };
-
-
-
-
-
-
-
-initVoiceSystem({ user, profile, db, app });
-
-
-
-
-
-
-
-
-
-
 
 
 
