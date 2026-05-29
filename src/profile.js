@@ -152,21 +152,21 @@ async function renderProfileSettings() {
 
 
 
-  // document.getElementById('signupBtn').onclick = async () => {
-  //   const email = document.getElementById('email').value.trim();
-  //   const password = document.getElementById('password').value.trim();
+  document.getElementById('signupBtn').onclick = async () => {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-  //   if (!email || !password) {
-  //     alert("Email and password required");
-  //     return;
-  //   }
+    if (!email || !password) {
+      alert("Email and password required");
+      return;
+    }
 
-  //   try {
-  //     await createUserWithEmailAndPassword(auth, email, password);
-  //   } catch (err) {
-  //     alert(err.message);
-  //   }
-  // };
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      alert(err.message);
+    }
+  };
     return;
   }
 
@@ -241,9 +241,9 @@ async function renderProfileSettings() {
              placeholder="Hotel name or area (e.g., Rove Downtown, Marina)">
     </div>
 
-    <div>
-          <label>What is on your mind?</label>
-          <input type="text" id="thoughts" value="${profile.thoughts || ''}"></input>
+    <div id="thoughts-container">
+          <label id="thoughts-label">What is on your mind?</label>
+          <textarea type="text" id="thoughts" value="${profile.thoughts || ''}"></textarea>
     </div>
 
 
@@ -280,6 +280,10 @@ async function renderProfileSettings() {
   </div>
 `;
 
+
+
+  document.getElementById('thoughts').value = profile.thoughts;
+  
   
   function runPopup() {
     
@@ -328,53 +332,6 @@ document.querySelectorAll('input[name="availability"]').forEach(radio => {
         radio.value === 'Other date' ? 'block' : 'none';
     });
   });
-
-
-
-
-
-
-  // ==============================================
-// 3.1 MAIN EVENT LISTENER (Event Delegation)
-// ==============================================
-// ONE listener handles ALL buttons for ALL 3 questions
-// More efficient than attaching 15 separate listeners
-document.getElementById('voiceQuestionsContainer').addEventListener('click', async (e) => {
-  // 1. Find which button was clicked
-  const button = e.target.closest('button');
-  if (!button) return; // Click wasn't on a button
-  
-  // 2. Find which question this button belongs to
-  const questionEl = button.closest('.voice-question');
-  const qNumber = parseInt(questionEl.dataset.q); // Convert "1" → 1
-  const action = button.dataset.action; // "record", "stop", "play", "save", "delete"
-  
-  console.log(`Voice action: Q${qNumber} - ${action}`);
-  
-  // 3. Route to the appropriate handler
-  switch (action) {
-    case 'record':
-      await handleRecord(qNumber);
-      break;
-    case 'stop':
-      await handleStop(qNumber);
-      break;
-    case 'play':
-      await handlePlay(qNumber);
-      break;
-    case 'save':
-      await handleSave(qNumber);
-      break;
-    case 'delete':
-      await handleDelete(qNumber);
-      break;
-  }
-  
-
-});
-
-
-
 
 
 
