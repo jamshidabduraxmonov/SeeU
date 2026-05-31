@@ -30,6 +30,7 @@ let signOutPopup = false;
 
 async function renderProfileSettings() {
 
+  let signUp = false;
   
 
   if (!user) {
@@ -47,7 +48,8 @@ async function renderProfileSettings() {
             <button type="button" onclick="togglePassword()">Show Password</button>
             <div>
                 <button id="loginBtn" class="primary">Login</button>
-            </div>
+              </div>
+              
         </form>
       </div>
 
@@ -62,6 +64,10 @@ async function renderProfileSettings() {
       <button id="googleLogin"> <img width="48" height="48" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo"/> 
         <div><span>Sign In With Google</span></div> 
       </button>
+
+      <span>No Account yet? 
+        <button id="createBtn">Create Account</button>
+      </span>
     </div>
 
 
@@ -139,11 +145,13 @@ async function renderProfileSettings() {
           err.code === 'auth/user-not-found' ||
           err.code === 'auth/invalid-credential'
         ) {
-          try {
-            await createUserWithEmailAndPassword(auth, email, password);
-          } catch (signupErr) {
-            alert("Wrong password! Please try again!");
-          }
+          // try {
+          //   await createUserWithEmailAndPassword(auth, email, password);
+          // } catch (signupErr) {
+          //   alert("Wrong password! Please try again!");
+          // }
+
+          alert("Invalid credentials! Please, try again...");
         } else {
           alert(err.message);
         }
@@ -170,15 +178,8 @@ async function renderProfileSettings() {
     return;
   }
 
-
-
-
-
   
-
-
-
-
+  
  
 
     function signOutGoogle() {
