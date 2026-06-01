@@ -94,6 +94,51 @@ async function renderProfileSettings() {
   `;
 
 
+
+
+  content.addEventListener('click', (e) => {
+    if(e.target.id === 'createBtn') {
+      content.innerHTML = `
+      <div class="onboard" style="text-align:center; padding:40px 20px; max-width:400px; margin:0 auto;">
+      <h1>SeeU in Dubai ✈️</h1>
+      <p>Meet new friends to hang out!</p>
+
+      <div>
+        <form>
+            <input id="signUpEmail" class="input" type="email" placeholder="Email"
+                    style="width:100%;padding:16px;margin:10px 0;border-radius:12px;border:1px solid #ddd;" />
+
+            <input id="signUpPassword" class="input" type="password" placeholder="Create Password(or enter previous one)" style="width:100%;padding:16px;margin:10px 0;border-radius:12px;border:1px solid #ddd;" />
+            <button type="button" onclick="togglePassword()">Show Password</button>
+            <div>
+                <button id="signUpBtn" class="primary">SignUp</button>
+              </div>
+              
+        </form>
+      </div>
+
+
+      <div class="or-divider">
+        <h2>Or</h2>
+      </div>
+     
+
+
+
+      <button id="googleLogin"> <img width="48" height="48" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo"/> 
+        <div><span>Sign In With Google</span></div> 
+      </button>
+
+     
+    </div>
+
+      `}
+
+
+      
+  })
+
+
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({prompt: 'select_account'});
     const auth = getAuth();
@@ -158,23 +203,6 @@ async function renderProfileSettings() {
       }
     };
 
-
-
-  document.getElementById('signupBtn').onclick = async () => {
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-
-    if (!email || !password) {
-      alert("Email and password required");
-      return;
-    }
-
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      alert(err.message);
-    }
-  };
     return;
   }
 
